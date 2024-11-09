@@ -1,0 +1,37 @@
+<html>
+ <head>
+  <title>DealsDray</title>
+  <style>
+   /* Your existing styles */
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <div class="background-pattern"></div>
+   <div class="logo">
+    <img alt="DealsDray Logo" height="100" src="https://storage.googleapis.com/a1aa/image/VcEo7Yv0CG6wEhzyhkpdLCiVbab9ykjTSQ0tCCMCJu5f7fuTA.jpg" width="100"/>
+    <div class="logo-text">DealsDray</div>
+   </div>
+  </div>
+  <script>
+    // Device Info API Call
+    fetch('http://devapiv4.dealsdray.com/api/v2/user/device/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        // Include necessary data for the API
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Redirect to the login screen or handle success
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  </script>
+ </body>
+</html>

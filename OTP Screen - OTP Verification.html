@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f8f8;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .icon {
+            font-size: 50px;
+            color: #ff4d4d;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0 10px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .otp-inputs input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 24px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .timer {
+            font-size: 16px;
+            color: #888;
+        }
+        .resend {
+            font-size: 16px;
+            color: #888;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <i class="fas fa-mobile-alt"></i>
+            <i class="fas fa-comment-dots" style="position: relative; left: -20px; top: -20px;"></i>
+        </div>
+        <div class="title">OTP Verification</div>
+        <div class="subtitle">We have sent a unique OTP number to your mobile +91-9765232817</div>
+        <div class="otp-inputs">
+            <input type="text" maxlength="1" id="otp1">
+            <input type="text" maxlength="1" id="otp2">
+            <input type="text" maxlength="1" id="otp3">
+            <input type="text" maxlength="1" id="otp4">
+        </div>
+        <div>
+            <span class="timer">01 : 57</span>
+            <a href="#" class="resend" onclick="sendOTP()">SEND AGAIN</a>
+        </div>
+        <button onclick="verifyOTP()">Verify OTP</button>
+    </div>
+
+    <script>
+        function sendOTP() {
+            // Function to send OTP to the user's phone number
+            // Implement the API call to send OTP here
+            alert('OTP sent to your phone number.');
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('otp1').value + 
+                        document.getElementById('otp2').value + 
+                        document.getElementById('otp3').value + 
+                        document.getElementById('otp4').value;
+            const deviceId = "62b43472c84bb6dac82e0504";
+            const userId = "62b43547c84bb6dac82e0525";
+
+            fetch('http://devapiv4.dealsdray.com/api/v2/user/otp/verification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    otp: otp,
+                    deviceId: deviceId,
+                    userId: userId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('OTP verified successfully.');
+                } else {
+                    alert('OTP verification failed.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while verifying OTP.');
+            });
+        }
+    </script>
+</body>
+</html>

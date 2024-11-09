@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DealsDray Home</title>
+    <style>
+        /* Your existing styles */
+        .product {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to DealsDray!</h1>
+    <h2>Available Products</h2>
+    <div id="products"></div>
+    <script>
+        // Simulate fetching products
+        function fetchProducts() {
+            // Simulated product data
+            const products = [
+                { name: 'Product 1', discount: 10, imageUrl: 'https://via.placeholder.com/150' },
+                { name: 'Product 2', discount: 20, imageUrl: 'https://via.placeholder.com/150' },
+                { name: 'Product 3', discount: 30, imageUrl: 'https://via.placeholder.com/150' },
+            ];
+            
+            const productsContainer = document.getElementById('products');
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img alt="${product.name}" height="150" src="${product.imageUrl}" width="150"/>
+                    <p>${product.name}</p>
+                    <div class="discount">${product.discount}% Off</div>
+                `;
+                productsContainer.appendChild(productDiv);
+            });
+        }
+
+        // Call the fetchProducts function when the page loads
+        window.onload = fetchProducts;
+    </script>
+</body>
+</html>
